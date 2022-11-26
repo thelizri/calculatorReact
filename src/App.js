@@ -5,6 +5,7 @@ import OperationButton from "./OperationButton";
 import DeleteButton from "./DeleteButton";
 import ClearButton from "./ClearButton";
 import EqualsButton from "./EqualsButton";
+import {add_digit, choose_operation, delete_digit, evaluate_result} from "./utilities";
 
 export const ACTIONS = {
   ADD_DIGIT: 'add_digit',
@@ -14,13 +15,24 @@ export const ACTIONS = {
   EVALUATE: 'evaluate'
 }
 
-function reducer(state, {type, payload}){
-
+function reducer(state, operations) {
+  switch (operations.type) {
+    case ACTIONS.ADD_DIGIT:
+      return add_digit(state, operations);
+    case ACTIONS.CHOOSE_OPERATION:
+      return choose_operation(state, operations);
+    case ACTIONS.CLEAR:
+      return {}
+    case ACTIONS.DELETE_DIGIT:
+      return delete_digit(state, operations);
+    case ACTIONS.EVALUATE:
+      return evaluate_result(state, operations);
+  }
 }
 
 function App() {
 
-  const [{currentOperand, previousOperand, operator},dispatch] = useReducer(reducer, {});
+  const [{currentOperand, previousOperand, operation},dispatch] = useReducer(reducer, {});
 
   return ( <div className={"calculatorGrid"}>
     <div className={"output"}>
