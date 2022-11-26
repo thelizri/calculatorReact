@@ -2,6 +2,9 @@ import "./styles.css";
 import {useReducer} from "react";
 import DigitButton from "./DigitButton";
 import OperationButton from "./OperationButton";
+import DeleteButton from "./DeleteButton";
+import ClearButton from "./ClearButton";
+import EqualsButton from "./EqualsButton";
 
 export const ACTIONS = {
   ADD_DIGIT: 'add_digit',
@@ -24,8 +27,8 @@ function App() {
       <div className={"previous_operand"}>{previousOperand}</div>
       <div className={"current_operand"}>{currentOperand}</div>
     </div>
-    <button className={"span_two"}>AC</button>
-    <button>DEL</button>
+    <ClearButton dispatch={dispatch}/>
+    <DeleteButton dispatch={dispatch}/>
     <OperationButton dispatch={dispatch} operation={"÷"}/>
     <DigitButton dispatch={dispatch} digit={"1"}/>
     <DigitButton dispatch={dispatch} digit={"2"}/>
@@ -41,7 +44,7 @@ function App() {
     <OperationButton dispatch={dispatch} operation={"-"}/>
     <DigitButton dispatch={dispatch} digit={"."}/>
     <DigitButton dispatch={dispatch} digit={"0"}/>
-    <button className={"span_two"}>=</button>
+    <EqualsButton dispatch={dispatch}/>
   </div>);
 }
 
